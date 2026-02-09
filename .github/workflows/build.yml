@@ -29,14 +29,23 @@ jobs:
       - name: Build EXE with PyInstaller
         run: pyinstaller PDF_to_PNG.spec --noconfirm
 
+      - name: Generate SHA-256
+        run: |
+          cd dist
+          certutil -hashfile PDF_to_PNG.exe SHA256 > SHA256SUMS.txt
+
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
           name: PDF_to_PNG
-          path: dist/PDF_to_PNG.exe
+          path: |
+            dist/PDF_to_PNG.exe
+            dist/SHA256SUMS.txt
 
       - name: Upload to Release
         if: github.event_name == 'release'
         uses: softprops/action-gh-release@v2
         with:
-          files: dist/PDF_to_PNG.exe
+          files: |
+            dist/PDF_to_PNG.exe
+            dist/SHA256SUMS.txt
