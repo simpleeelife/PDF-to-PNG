@@ -35,5 +35,5 @@ exe = EXE(
     target_arch=None,
     codesign_identity=None,
     entitlements_file=None,
-    icon=r'C:\AntigravityProjects\pdf-to-png\pdf_to_png_converter\icon.ico',
+    icon=['pdf_to_png_converter/icon.ico'],
 )
